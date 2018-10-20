@@ -4,7 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    //参与页面渲染的数据
+    motto: '用户位的坐标',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -16,6 +17,7 @@ Page({
     })
   },
   onLoad: function () {
+    //页面渲染后执行
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -49,6 +51,33 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  getLoc:function(e){
+    let that=this;
+    wx.getLocation({
+      // type:'wgs84',
+      success: function(res) {
+        let lat=res.latitude;
+        let lon=res.longitude;
+        console.log(res)
+        that.setData({
+          lon:lon,
+          lat:lat,
+          markers:[{
+            latitude:lat,
+            longitude:lon,
+            iconPath: app.globalData.userInfo.avatarUrl,
+            width:20,
+            height:20,
+            borderRadius:0.5
+          }]
+        })
+        // wx.openLocation({
+        //   latitude: lat,
+        //   longitude: lon,
+        // })
+      },
     })
   }
 })
