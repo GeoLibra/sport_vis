@@ -1,15 +1,4 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <button bindtap='getLoc'>获取用户位置</button>
-    <text class="user-motto">{{loc}}</text>
-    <map longitude='{{lon}}' latitude='{{lat}}' show-location='true'></map>
-  </view>
+  <ff-canvas id="column-dom" canvas-id="column" opts="{{ opts }}"></ff-canvas>
 </view>
